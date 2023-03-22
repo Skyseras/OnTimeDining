@@ -1,0 +1,29 @@
+version: '3.7'
+name: onTimeDining
+services:
+  service-onTimeDining:
+    image: ontimedining
+    container_name: onTimeDining-container
+    build: .
+    ports:
+      - "9090:9090"
+    depends_on:
+      - mongodb
+    networks:
+      - net.onTimeDining
+
+  mongodb:
+    image: mongo
+    container_name: mongo-onTimeDinning
+    ports:
+      - "27017:27117"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    networks:
+      - net.onTimeDining
+
+networks:
+  net.onTimeDining:
+    name: net.onTimeDining
+    driver: bridge
